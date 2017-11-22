@@ -4,7 +4,7 @@
 * Adjust pluggabletransports.xml under ```{B2BI_INSTALL_HOME}/Interchange/conf``` with the xml content from ![Pluggable-Transport-Configuration](distributions/azure-pluggabletransport.xml)
   *NOTE: A constant setting with the name 'Exchange type' is used to determine whether the plugin is used for Pickup/Delivery.
 * Bounce Trading Engine on all cluster nodes
-* Source can be viewed ![here](b2b-azure-plugin)
+* Source can be viewed ![here](../)
   * If you are building on your local laptop, add a lib folder to the project and include ```interchange-server.jar``` and other dependencies. Refer gradle build script for more details
 * The plugin is tested minimally, and is built as an exercise. Please use it with proper discretion. Feel free to submit a pull request for any issues/bug fixes/suggestions.
 
