@@ -1,0 +1,1 @@
+Class-Path: b2b-azure-plugin/lib/azure-storage-6.1.0.jar b2b-azure-plugin/lib/azure-keyvault-core-0.8.0.jar b2b-azure-plugin/lib/commons-lang3-3.7.jar
