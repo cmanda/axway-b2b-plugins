@@ -9,8 +9,8 @@
 ### Sample screenshots
 
 #### Sample Application Pickup Configuration
-![Sample Application Pickup Configuration](distributions/Sample_ApplicationPickup.JPG)
+![Sample Application Pickup Configuration](distributions/images/Sample_ApplicationPickup.JPG)
 
 
 #### Sample Application Delivery Configuration
-![Sample Application Delivery Configuration](distributions/Sample_ApplicationDelivery.JPG)
+![Sample Application Delivery Configuration](distributions/images/Sample_ApplicationDelivery.JPG)
