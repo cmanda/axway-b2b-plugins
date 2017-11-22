@@ -1,4 +1,4 @@
-#### Azure Blob Storage with Application pickup, and Delivery
+## Azure Blob Storage plugin with Application pickup, and Delivery
 * Download PluggableTransport ![here](distributions) and extract the contents to ```{B2BI_INSTALL_HOME}/Interchange/site/jars``` to each of the B2Bi cluster nodes.
 * Adjust pluggabletransports.xml under ```{B2BI_INSTALL_HOME}/Interchange/conf``` with the xml content from ![Pluggable-Transport-Configuration](b2b-azure-plugin/distributions/azure-pluggabletransports.xml)
 * Bounce Trading Engine on all cluster nodes
@@ -9,8 +9,8 @@
 ### Sample screenshots
 
 #### Sample Application Pickup Configuration
-![Transfer Site definition](distributions/Sample_ApplicationPickup.JPG)
+![Sample Application Pickup Configuration](distributions/Sample_ApplicationPickup.JPG)
 
 
 #### Sample Application Delivery Configuration
-![Transfer Site definition](distributions/Sample_ApplicationDelivery.JPG)
+![Sample Application Delivery Configuration](distributions/Sample_ApplicationDelivery.JPG)
