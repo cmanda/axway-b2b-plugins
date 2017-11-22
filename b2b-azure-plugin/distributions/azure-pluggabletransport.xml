@@ -1,0 +1,81 @@
+<!--
+        Azure Blob Storage Consumer to download/consume content from Azure Storage Blobs.
+        NOTE: ConstantSetting must be set to Pickup
+-->
+<TransportDefinition name="Azure Blob Storage Consumer" description="Pluggable transport which consumes messages from the Azure Blob Store." available="true">
+        <Class>com.axway.pct.b2b.plugins.transport.AzureBlobPluggableTransport</Class>
+        <Usages>
+                <Consume>
+                        <Integration />
+                        <RawTrading />
+                </Consume>
+        </Usages>
+        <SettingDefinitions>
+                <SettingDefinition name="Container" defaultValue="" description="Container within the Storage account" encrypt="false" mask="false" required="true" type="string" />
+                <SettingDefinition name="Type" defaultValue="glob" description="Download pattern for remote blobs." type="string" required="true" encrypt="false" mask="false">
+                        <SelectionList>
+                                <SelectionItem>glob</SelectionItem>
+                                <SelectionItem>regex</SelectionItem>
+                        </SelectionList>
+                </SettingDefinition>
+                <SettingDefinition name="Remote Path" defaultValue="" description="Source Folder" encrypt="false" mask="false" required="true" type="string"/>
+                <SettingDefinition name="Filter" defaultValue="*" description="Filtering pattern to download" encrypt="false" mask="false" required="true" type="string"/>
+                <SettingDefinition name="Post Process" defaultValue="none" description="Post Processing Step" type="string" required="true" encrypt="false" mask="false">
+                        <SelectionList>
+                                <SelectionItem>none</SelectionItem>
+                                <SelectionItem>delete</SelectionItem>
+                        </SelectionList>
+                </SettingDefinition>
+                <SettingDefinition name="Name" defaultValue="" description="Azure Storage Account Name." type="string" required="true" encrypt="false" mask="false"/>
+                <SettingDefinition name="Key" defaultValue="" description="Azure Storage Account Key" type="string" required="true" encrypt="true" mask="true"/>
+        </SettingDefinitions>
+        <ConstantSettings>
+                <ConstantSetting name="Exchange Type" value="pickup" />
+        </ConstantSettings>
+</TransportDefinition>
+
+
+<!--
+        Azure Blob Storage Producer to upload/produce content to Azure Storage as Blobs.
+        NOTE: ConstantSetting must be set to Delivery
+-->
+<TransportDefinition name="Azure Blob Storage Producer" description="Pluggable transport which produces messages to the Azure Blob Storage." available="true">
+        <Class>com.axway.pct.b2b.plugins.transport.AzureBlobPluggableTransport</Class>
+        <Usages>
+                <Produce>
+                        <Integration />
+                        <RawTrading />
+                </Produce>
+        </Usages>
+        <SettingDefinitions>
+                <SettingDefinition name="Container" description="Container within the Storage account" encrypt="false" mask="false" required="true" type="string" defaultValue="" />
+                <SettingDefinition name="Auto Create" description="Auto create Container within the Storage account if it doesn't exist" encrypt="false" mask="false" required="true" type="string" defaultValue="true">
+                        <SelectionList>
+                                <SelectionItem>true</SelectionItem>
+                                <SelectionItem>false</SelectionItem>
+                        </SelectionList>
+                </SettingDefinition>
+                <SettingDefinition name="Delivery Mode" description="Upload mode to use for transfers. (auto|regular|chunked)" type="string" defaultValue="auto" required="true" encrypt="false" mask="false">
+                        <SelectionList>
+                                <SelectionItem>auto</SelectionItem>
+                                <SelectionItem>single</SelectionItem>
+                                <SelectionItem>multipart</SelectionItem>
+                        </SelectionList>
+                </SettingDefinition>
+                <SettingDefinition name="Delivery Path" description="Destination path to upload the blob within a container" encrypt="false" mask="false" required="true" type="string" defaultValue="" />
+                <SettingDefinition name="User Metadata" description="Custom Metadata to add to Payload" encrypt="false" mask="false" required="true" type="multiString" defaultValue="" />
+                <SettingDefinition name="Append Axway Metadata" description="Append Interchange Metadata to blob" type="string" defaultValue="yes" required="true" encrypt="false" mask="false">
+                        <SelectionList>
+                                <SelectionItem>yes</SelectionItem>
+                                <SelectionItem>no</SelectionItem>
+                        </SelectionList>
+                </SettingDefinition>
+                <SettingDefinition name="Name" defaultValue="" description="Azure Storage Account Name." type="string" required="true" encrypt="false" mask="false" />
+                <SettingDefinition name="Key" defaultValue="" description="Azure Storage Account Key" type="string" required="true" encrypt="true" mask="true" />
+
+        </SettingDefinitions>
+        <ConstantSettings>
+                <ConstantSetting name="Exchange Type" value="delivery" />
+        </ConstantSettings>
+</TransportDefinition>
+
