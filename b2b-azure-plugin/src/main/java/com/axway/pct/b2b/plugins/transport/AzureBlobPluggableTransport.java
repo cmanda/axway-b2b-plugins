@@ -448,7 +448,7 @@ public class AzureBlobPluggableTransport implements PluggableClient {
 
 			returnMessage.setData(new VirtualData(msg.toCharArray()));
 		}
-		return returnMessage;
+		return null;
 	}
 
 	private boolean chunkUpload(CloudBlobContainer container, String fileName, PluggableMessage pluggableMessage,

@@ -63,7 +63,7 @@
                         </SelectionList>
                 </SettingDefinition>
                 <SettingDefinition name="Delivery Path" description="Destination path to upload the blob within a container" encrypt="false" mask="false" required="true" type="string" defaultValue="" />
-                <SettingDefinition name="User Metadata" description="Custom Metadata to add to Payload" encrypt="false" mask="false" required="true" type="multiString" defaultValue="" />
+                <SettingDefinition name="User Metadata" description="Custom Metadata to add to Payload" encrypt="false" mask="false" required="false" type="multiString" defaultValue="" />
                 <SettingDefinition name="Append Axway Metadata" description="Append Interchange Metadata to blob" type="string" defaultValue="yes" required="true" encrypt="false" mask="false">
                         <SelectionList>
                                 <SelectionItem>yes</SelectionItem>
