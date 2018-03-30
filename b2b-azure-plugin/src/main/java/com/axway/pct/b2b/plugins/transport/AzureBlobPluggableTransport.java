@@ -278,6 +278,10 @@ public class AzureBlobPluggableTransport implements PluggableClient {
 				downloadBlob.download(targetStream);
 				data = new VirtualData(targetStream.toByteArray());
 
+				if (nameFromList.lastIndexOf(PluginConstants.AZURE_FOLDER_SEPARATOR) != -1) {
+					nameFromList = nameFromList.substring(nameFromList.lastIndexOf(PluginConstants.AZURE_FOLDER_SEPARATOR) + 1);
+				}
+
 				pluggableMessage.setData(data);
 				pluggableMessage.setFilename(nameFromList);
 

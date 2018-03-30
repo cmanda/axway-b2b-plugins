@@ -191,8 +191,7 @@ public class AzureTransportUtility {
 		if (downloadObjectKey.equalsIgnoreCase(StringUtils.EMPTY))
 			return StringUtils.EMPTY;
 
-		downloadDirectory = getSanitizedDownloadPath(downloadObjectKey).substring(0,
-				downloadObjectKey.lastIndexOf("/"));
+		downloadDirectory = getSanitizedDownloadPath(downloadObjectKey);
 
 		log.info(LOGGER_KEY + "Download directory defined as: " + downloadDirectory);
 		return downloadDirectory;
