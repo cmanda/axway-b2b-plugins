@@ -25,7 +25,7 @@ repositories {
 dependencies {
     // The production code uses the SLF4J logging API at compile time
     compile 'commons-io:commons-io:2.4'
-    compile 'com.microsoft.azure:azure-storage:6.1.0'
+    compile 'com.microsoft.azure:azure-storage:7.0.0'
 	compile 'org.apache.commons:commons-lang3:3.7'
 	compile 'com.google.guava:guava:11.0.2'
 	

@@ -16,8 +16,6 @@ public class PluginConstants {
 	public static final long BLOCK_SIZE = (10 * 1024 * 1024);
 	public static final String EXCHANGE_DELIVERY_NAME = "delivery";
 	public static final String EXCHANGE_PICKUP_NAME = "pickup";
-	public static final String POST_PROCESS_NONE = "none";
-	public static final String POST_PROCESS_DELETE = "delete";
 	public static final String APPEND_METADATA_FLAG_YES = "yes";
 	public static final String APPEND_METADATA_FLAG_NO = "no";
 

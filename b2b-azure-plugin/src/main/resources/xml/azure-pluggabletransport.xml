@@ -20,12 +20,6 @@
                 </SettingDefinition>
                 <SettingDefinition name="Remote Path" defaultValue="" description="Source Folder" encrypt="false" mask="false" required="true" type="string"/>
                 <SettingDefinition name="Filter" defaultValue="*" description="Filtering pattern to download" encrypt="false" mask="false" required="true" type="string"/>
-                <SettingDefinition name="Post Process" defaultValue="none" description="Post Processing Step" type="string" required="true" encrypt="false" mask="false">
-                        <SelectionList>
-                                <SelectionItem>none</SelectionItem>
-                                <SelectionItem>delete</SelectionItem>
-                        </SelectionList>
-                </SettingDefinition>
                 <SettingDefinition name="Name" defaultValue="" description="Azure Storage Account Name." type="string" required="true" encrypt="false" mask="false"/>
                 <SettingDefinition name="Key" defaultValue="" description="Azure Storage Account Key" type="string" required="true" encrypt="true" mask="true"/>
         </SettingDefinitions>
