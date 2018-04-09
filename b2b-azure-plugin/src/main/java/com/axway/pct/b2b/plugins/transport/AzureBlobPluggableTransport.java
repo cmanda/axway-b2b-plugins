@@ -63,7 +63,6 @@ public class AzureBlobPluggableTransport implements PluggableClient {
 	private static final String SETTING_PICKUP_PATH = "Remote Path";
 	private static final String SETTING_PICKUP_PATTERN = "Filter";
 	private static final String SETTING_PATTERN_TYPE = "Type";
-	private static final String SETTING_POST_PROCESS = "Post Process";
 
 	// Produce plugin settings
 	private static final String SETTING_AUTO_CREATE = "Auto Create";
@@ -147,12 +146,10 @@ public class AzureBlobPluggableTransport implements PluggableClient {
 					bean.setPatternType(pluggableSettings.getSetting(SETTING_PATTERN_TYPE));
 					bean.setKey(pluggableSettings.getSetting(SETTING_KEY));
 					bean.setName(pluggableSettings.getSetting(SETTING_NAME));
-					bean.setPostProcess(pluggableSettings.getSetting(SETTING_POST_PROCESS));
 					log.debug(LOGGER_KEY + "Container		: " + bean.getContainer());
 					log.debug(LOGGER_KEY + "Pickup Pattern	: " + bean.getPickupPattern());
 					log.debug(LOGGER_KEY + "Pickup Path		: " + bean.getPickupPath());
 					log.debug(LOGGER_KEY + "Pattern Type	: " + bean.getPatternType());
-					log.debug(LOGGER_KEY + "Post Processing : " + bean.getPostProcess());
 					log.debug(LOGGER_KEY + "Storage Account	: " + bean.getName());
 				} else if(pluginType.equalsIgnoreCase(PluginConstants.EXCHANGE_DELIVERY_NAME)){
 
@@ -303,12 +300,8 @@ public class AzureBlobPluggableTransport implements PluggableClient {
 		CloudBlockBlob deleteBlob = null;
 		try {
 			deleteBlob = this.mBlobContainer.getBlockBlobReference(blobName);
-			if (this.config.getPostProcess().equalsIgnoreCase(PluginConstants.POST_PROCESS_DELETE)) {
-				boolean status = deleteBlob.deleteIfExists();
-				log.info(LOGGER_KEY + "Post processing Status (delete): " + status);
-			} else {
-				log.info(LOGGER_KEY + "Post processing skipped: " + this.config.getPostProcess());
-			}
+			boolean status = deleteBlob.deleteIfExists();
+			log.info(LOGGER_KEY + "Delete status: " + status);
 		} catch (URISyntaxException | StorageException e) {
 			log.error(LOGGER_KEY + e.getMessage());
 			throw new UnableToDeleteException("Unable to Delete Source Blob [" + blobName + "]" + e.getMessage(), e);
