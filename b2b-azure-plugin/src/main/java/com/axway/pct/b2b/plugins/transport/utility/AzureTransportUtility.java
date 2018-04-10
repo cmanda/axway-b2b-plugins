@@ -175,9 +175,10 @@ public class AzureTransportUtility {
 
 		// Scan whole string
 		for (int i = 0; i < sanitizedKey.length(); i++) {
-			if (!Character.isUnicodeIdentifierPart(sanitizedKey.charAt(i))) {
+			char c = sanitizedKey.charAt(i);
+			if (!Character.isUnicodeIdentifierPart(c)) {
 				sanitizedKey.setCharAt(i, '_');
-				log.debug(LOGGER_KEY + "Replacing invalid key character ('" + sanitizedKey.charAt(i) + "' with '_') [Key: " + key + "]");
+				log.debug(LOGGER_KEY + "Replacing invalid key character ('" + c + "' with '_') [Key: " + key + "]");
 			}
 		}
 
@@ -195,10 +196,11 @@ public class AzureTransportUtility {
 				value = "EMPTY";
 				log.debug(LOGGER_KEY + "Replacing null/empty values with 'EMPTY' string literal for [Key: " + key + "]");
 			}
-						
-			azureFormatMetadata.put(sanitizeMetadataName(key).toLowerCase(), value);
 			
-			log.debug(LOGGER_KEY + "Interchange Metadata [Key: " + key.toLowerCase() + ", Value: " + pluggableMessageMetadata.get(key) + "]");
+			String sk = sanitizeMetadataName(key).toLowerCase();
+			azureFormatMetadata.put(sk, value);
+			
+			log.debug(LOGGER_KEY + "Interchange Metadata [Key: " + sk + ", Value: " + pluggableMessageMetadata.get(key) + "]");
 
 		}
 		return azureFormatMetadata;
