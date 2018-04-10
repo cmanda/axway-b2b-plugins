@@ -163,24 +163,42 @@ public class AzureTransportUtility {
 		return entries;
 	}
 
+	public static String sanitizeMetadataName(String key) {
+		// Check for allowed characters
+		StringBuilder sanitizedKey = new StringBuilder(key);
+
+		// Prepend '_' if first character is illegal
+		if (sanitizedKey.charAt(0) != '_' && !Character.isUnicodeIdentifierStart(sanitizedKey.charAt(0))) {
+			sanitizedKey.insert(0, "_");
+			log.debug(LOGGER_KEY + "Prepending '_' to key name) [Key: " + key + "]");
+		}
+
+		// Scan whole string
+		for (int i = 0; i < sanitizedKey.length(); i++) {
+			if (!Character.isUnicodeIdentifierPart(sanitizedKey.charAt(i))) {
+				sanitizedKey.setCharAt(i, '_');
+				log.debug(LOGGER_KEY + "Replacing invalid key character ('" + sanitizedKey.charAt(i) + "' with '_') [Key: " + key + "]");
+			}
+		}
+
+		return sanitizedKey.toString();
+	}
+
 	public static Map<String, String> sanitizeMetadata(Map<String, String> pluggableMessageMetadata) {
 		Map<String, String> azureFormatMetadata = new HashMap<String, String>();
 		for (Iterator<String> iterator = pluggableMessageMetadata.keySet().iterator(); iterator.hasNext();) {
 			String key = (String) iterator.next();
 			String value = pluggableMessageMetadata.get(key);
+			
+			// Check for empty value
 			if (null == value || value.isEmpty()) {
 				value = "EMPTY";
-				log.info(LOGGER_KEY + "[NOTE]: Replacing null/empty values with 'EMPTY' for [Key: " + key
-						+ "]. Should be properly handled for production grade deployments.");
+				log.debug(LOGGER_KEY + "Replacing null/empty values with 'EMPTY' string literal for [Key: " + key + "]");
 			}
-			if (key.contains(".")) {
-				key = key.replace(".", "_");
-				log.info(LOGGER_KEY + "[NOTE]: Replacing invalid key values ('.' with '_') [Key: " + key
-						+ "]. Should be properly handled for production grade deployments.");
-			}
-			azureFormatMetadata.put(key.toLowerCase(), value);
-			log.info(LOGGER_KEY + "Interchange Metadata [Key: " + key.toLowerCase() + ", Value: " + pluggableMessageMetadata.get(key)
-					+ "]");
+						
+			azureFormatMetadata.put(sanitizeMetadataName(key).toLowerCase(), value);
+			
+			log.debug(LOGGER_KEY + "Interchange Metadata [Key: " + key.toLowerCase() + ", Value: " + pluggableMessageMetadata.get(key) + "]");
 
 		}
 		return azureFormatMetadata;
