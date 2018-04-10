@@ -28,9 +28,10 @@ dependencies {
     compile 'com.microsoft.azure:azure-storage:7.0.0'
 	compile 'org.apache.commons:commons-lang3:3.7'
 	compile 'com.google.guava:guava:11.0.2'
-	
     
     compile fileTree(dir: 'lib', include: '*.jar')
+
+    testCompile 'junit:junit:4.12'
 }
 
 jar {
