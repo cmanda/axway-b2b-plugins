@@ -12,16 +12,16 @@
         </Usages>
         <SettingDefinitions>
                 <SettingDefinition name="Container" defaultValue="" description="Container within the Storage account" encrypt="false" mask="false" required="true" type="string" />
-                <SettingDefinition name="Type" defaultValue="glob" description="Download pattern for remote blobs." type="string" required="true" encrypt="false" mask="false">
+                <SettingDefinition name="Pickup Path" defaultValue="" description="Source Folder" encrypt="false" mask="false" required="true" type="string"/>
+                <SettingDefinition name="Filter Type" defaultValue="glob" description="Download pattern for remote blobs." type="string" required="true" encrypt="false" mask="false">
                         <SelectionList>
                                 <SelectionItem>glob</SelectionItem>
                                 <SelectionItem>regex</SelectionItem>
                         </SelectionList>
                 </SettingDefinition>
-                <SettingDefinition name="Remote Path" defaultValue="" description="Source Folder" encrypt="false" mask="false" required="true" type="string"/>
                 <SettingDefinition name="Filter" defaultValue="*" description="Filtering pattern to download" encrypt="false" mask="false" required="true" type="string"/>
-                <SettingDefinition name="Name" defaultValue="" description="Azure Storage Account Name." type="string" required="true" encrypt="false" mask="false"/>
-                <SettingDefinition name="Key" defaultValue="" description="Azure Storage Account Key" type="string" required="true" encrypt="true" mask="true"/>
+                <SettingDefinition name="Account Name" defaultValue="" description="Azure Storage Account Name." type="string" required="true" encrypt="false" mask="false"/>
+                <SettingDefinition name="Account Key" defaultValue="" description="Azure Storage Account Key" type="string" required="true" encrypt="true" mask="true"/>
         </SettingDefinitions>
         <ConstantSettings>
                 <ConstantSetting name="Exchange Type" value="pickup" />
@@ -64,8 +64,8 @@
                                 <SelectionItem>no</SelectionItem>
                         </SelectionList>
                 </SettingDefinition>
-                <SettingDefinition name="Name" defaultValue="" description="Azure Storage Account Name." type="string" required="true" encrypt="false" mask="false" />
-                <SettingDefinition name="Key" defaultValue="" description="Azure Storage Account Key" type="string" required="true" encrypt="true" mask="true" />
+                <SettingDefinition name="Account Name" defaultValue="" description="Azure Storage Account Name." type="string" required="true" encrypt="false" mask="false" />
+                <SettingDefinition name="Account Key" defaultValue="" description="Azure Storage Account Key" type="string" required="true" encrypt="true" mask="true" />
 
         </SettingDefinitions>
         <ConstantSettings>
