@@ -93,7 +93,7 @@ public class AzureTransportUtility {
 		boolean result = true;
 
 		if (uploadMode.equalsIgnoreCase(AUTO_MODE)) {
-			result = fileSizeInBytes < (1024 * 1024 * 1024);
+			result = fileSizeInBytes < (100 * 1024 * 1024);
 
 			log.debug(LOGGER_KEY + "Auto mode is enabled. File Size is lesser than 100MB? [" + result
 					+ "]. Multipart mode: [" + !result + "]");
