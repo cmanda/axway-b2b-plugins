@@ -11,17 +11,17 @@
                 </Consume>
         </Usages>
         <SettingDefinitions>
-                <SettingDefinition name="Container" defaultValue="" description="Container within the Storage account" encrypt="false" mask="false" required="true" type="string" />
-                <SettingDefinition name="Pickup Path" defaultValue="" description="Source Folder" encrypt="false" mask="false" required="true" type="string"/>
-                <SettingDefinition name="Filter Type" defaultValue="glob" description="Download pattern for remote blobs." type="string" required="true" encrypt="false" mask="false">
+                <SettingDefinition name="Account Name" defaultValue="" description="Azure Storage Account Name" type="string" required="true" encrypt="false" mask="false"/>
+                <SettingDefinition name="Account Key" defaultValue="" description="Azure Storage Account Key" type="string" required="true" encrypt="true" mask="true"/>
+                <SettingDefinition name="Container" defaultValue="" description="Container within the Storage Account" encrypt="false" mask="false" required="true" type="string" />
+                <SettingDefinition name="Pickup Folder" defaultValue="" description="Source Folder (optional, if empty will pick up files in container root)" encrypt="false" mask="false" required="true" type="string"/>
+                <SettingDefinition name="Filter Type" defaultValue="glob" description="Pattern type for matching file names" type="string" required="true" encrypt="false" mask="false">
                         <SelectionList>
                                 <SelectionItem>glob</SelectionItem>
                                 <SelectionItem>regex</SelectionItem>
                         </SelectionList>
                 </SettingDefinition>
-                <SettingDefinition name="Filter" defaultValue="*" description="Filtering pattern to download" encrypt="false" mask="false" required="true" type="string"/>
-                <SettingDefinition name="Account Name" defaultValue="" description="Azure Storage Account Name." type="string" required="true" encrypt="false" mask="false"/>
-                <SettingDefinition name="Account Key" defaultValue="" description="Azure Storage Account Key" type="string" required="true" encrypt="true" mask="true"/>
+                <SettingDefinition name="Filter" defaultValue="*" description="Filter pattern to download remote files" encrypt="false" mask="false" required="true" type="string"/>
         </SettingDefinitions>
         <ConstantSettings>
                 <ConstantSetting name="Exchange Type" value="pickup" />
@@ -42,6 +42,8 @@
                 </Produce>
         </Usages>
         <SettingDefinitions>
+                <SettingDefinition name="Account Name" defaultValue="" description="Azure Storage Account Name" type="string" required="true" encrypt="false" mask="false" />
+                <SettingDefinition name="Account Key" defaultValue="" description="Azure Storage Account Key" type="string" required="true" encrypt="true" mask="true" />
                 <SettingDefinition name="Container" description="Container within the Storage account" encrypt="false" mask="false" required="true" type="string" defaultValue="" />
                 <SettingDefinition name="Auto Create" description="Auto create Container within the Storage account if it doesn't exist" encrypt="false" mask="false" required="true" type="string" defaultValue="true">
                         <SelectionList>
@@ -49,14 +51,14 @@
                                 <SelectionItem>false</SelectionItem>
                         </SelectionList>
                 </SettingDefinition>
-                <SettingDefinition name="Delivery Mode" description="Upload mode to use for transfers. (auto|regular|chunked)" type="string" defaultValue="auto" required="true" encrypt="false" mask="false">
+                <SettingDefinition name="Delivery Mode" description="Upload mode to use for transfers (auto|single|multipart)" type="string" defaultValue="auto" required="true" encrypt="false" mask="false">
                         <SelectionList>
                                 <SelectionItem>auto</SelectionItem>
                                 <SelectionItem>single</SelectionItem>
                                 <SelectionItem>multipart</SelectionItem>
                         </SelectionList>
                 </SettingDefinition>
-                <SettingDefinition name="Delivery Path" description="Destination path to upload the blob within a container" encrypt="false" mask="false" required="true" type="string" defaultValue="" />
+                <SettingDefinition name="Delivery Folder" description="Destination folder to upload the blob within a container; if empty will upload to container root" encrypt="false" mask="false" required="true" type="string" defaultValue="" />
                 <SettingDefinition name="User Metadata" description="Custom Metadata to add to Payload" encrypt="false" mask="false" required="false" type="multiString" defaultValue="" />
                 <SettingDefinition name="Append Axway Metadata" description="Append Interchange Metadata to blob" type="string" defaultValue="yes" required="true" encrypt="false" mask="false">
                         <SelectionList>
@@ -64,9 +66,6 @@
                                 <SelectionItem>no</SelectionItem>
                         </SelectionList>
                 </SettingDefinition>
-                <SettingDefinition name="Account Name" defaultValue="" description="Azure Storage Account Name." type="string" required="true" encrypt="false" mask="false" />
-                <SettingDefinition name="Account Key" defaultValue="" description="Azure Storage Account Key" type="string" required="true" encrypt="true" mask="true" />
-
         </SettingDefinitions>
         <ConstantSettings>
                 <ConstantSetting name="Exchange Type" value="delivery" />
