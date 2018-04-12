@@ -55,18 +55,18 @@ public class AzureBlobPluggableTransport implements PluggableClient {
 	private static final String LOGGER_KEY = "[Azure-Blob-Plugin]: ";
 
 	// Consume & Produce plugin settings
-	private static final String SETTING_NAME = "Name";
-	private static final String SETTING_KEY = "Key";
+	private static final String SETTING_NAME = "Account Name";
+	private static final String SETTING_KEY = "Account Key";
 	private static final String SETTING_CONTAINER = "Container";
 
 	// Consume plugin settings
-	private static final String SETTING_PICKUP_PATH = "Remote Path";
+	private static final String SETTING_PICKUP_PATH = "Pickup Folder";
 	private static final String SETTING_PICKUP_PATTERN = "Filter";
-	private static final String SETTING_PATTERN_TYPE = "Type";
+	private static final String SETTING_PATTERN_TYPE = "Filter Type";
 
 	// Produce plugin settings
 	private static final String SETTING_AUTO_CREATE = "Auto Create";
-	private static final String SETTING_DELIVERY_PATH = "Delivery Path";
+	private static final String SETTING_DELIVERY_PATH = "Delivery Folder";
 	private static final String SETTING_DELIVERY_MODE = "Delivery Mode";
 	private static final String SETTING_USER_METADATA = "User Metadata";
 	private static final String SETTING_APPEND_AXWAY_METADATA = "Append Axway Metadata";
