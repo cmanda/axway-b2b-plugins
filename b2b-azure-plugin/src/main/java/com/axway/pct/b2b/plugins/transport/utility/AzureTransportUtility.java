@@ -94,13 +94,10 @@ public class AzureTransportUtility {
 
 		if (uploadMode.equalsIgnoreCase(AUTO_MODE)) {
 			result = fileSizeInBytes < (100 * 1024 * 1024);
-
-			log.debug(LOGGER_KEY + "Auto mode is enabled. File Size is lesser than 100MB? [" + result
-					+ "]. Multipart mode: [" + !result + "]");
+			log.debug(LOGGER_KEY + "Auto mode is enabled. File size is lesser than 100MB? [" + result + "]. Multipart mode: [" + !result + "]");
 		} else if (uploadMode.equalsIgnoreCase(MULTIPART_MODE)) {
 			int chunks = (int) (fileSizeInBytes / PluginConstants.BLOCK_SIZE);
-			log.debug(LOGGER_KEY + "Multipart mode selected. Data will be sent in " + PluginConstants.BLOCK_SIZE
-					+ " byte sized chunks. Total Chunks are: " + chunks);
+			log.debug(LOGGER_KEY + "Multipart mode selected. Data will be sent in " + PluginConstants.BLOCK_SIZE + " byte sized chunks. Total Chunks are: " + chunks);
 			result = false;
 		} else {
 			log.debug(LOGGER_KEY + "Regular upload mode is selected.");
@@ -124,11 +121,9 @@ public class AzureTransportUtility {
 					PatternKeyValidator validator = PatternKeyValidatorFactory.createPatternValidator(patternType);
 					if (validator.isValid(getTarget(blob.getName()), downloadPattern)) {
 						result.add(blob.getName());
-						log.debug(LOGGER_KEY + " --- Matched Item[downloadPattern=" + downloadPattern + ", patternType="
-								+ patternType + "]: " + blob.getName());
+						log.debug(LOGGER_KEY + " --- Matched Item[downloadPattern=" + downloadPattern + ", patternType=" + patternType + "]: " + blob.getName());
 					} else {
-						log.debug(LOGGER_KEY + " --- No Matched Item[downloadPattern=" + downloadPattern
-								+ ", patternType=" + patternType + "]: " + blob.getName());
+						log.debug(LOGGER_KEY + " --- No Matched Item[downloadPattern=" + downloadPattern + ", patternType=" + patternType + "]: " + blob.getName());
 					}
 				}
 			}

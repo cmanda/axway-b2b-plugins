@@ -90,9 +90,7 @@ public class AzureBlobPluggableTransport implements PluggableClient {
 		if (null == log.getLevel())
 			log.setLevel(Level.DEBUG);
 
-		log.info(LOGGER_KEY
-				+ String.format("Executing PluggableTransport: %s version: %s", _PROGRAM_NAME, _PROGRAM_VERSION));
-
+		log.info(LOGGER_KEY + String.format("Executing PluggableTransport: %s version: %s", _PROGRAM_NAME, _PROGRAM_VERSION));
 	}
 
 	/**
@@ -127,7 +125,7 @@ public class AzureBlobPluggableTransport implements PluggableClient {
 	@SuppressWarnings("unused")
 	private void setAzureBlobClient(CloudStorageAccount azureStorageAccount) {
 		if (azureStorageAccount == null) {
-			log.error(LOGGER_KEY + "Azure storage account not available. Unable to Initialize Storage Client.");
+			log.error(LOGGER_KEY + "Azure Storage Account not available. Unable to initialize Storage Client.");
 			return;
 		}
 		this.mBlobClient = azureStorageAccount.createCloudBlobClient();
@@ -189,11 +187,9 @@ public class AzureBlobPluggableTransport implements PluggableClient {
 			if (this.mStorageAccount == null) {
 				this.mStorageAccount = CloudStorageAccount
 						.parse(AzureTransportUtility.getConnectionString(this.config.getName(), this.config.getKey()));
-				log.info(LOGGER_KEY + "Authentication being done again: "
-						+ this.mStorageAccount.getBlobStorageUri().toString());
+				log.info(LOGGER_KEY + "Authentication being done again: " + this.mStorageAccount.getBlobStorageUri().toString());
 			} else {
-				log.info(LOGGER_KEY + "Authentication already done to: "
-						+ this.mStorageAccount.getBlobStorageUri().toString());
+				log.info(LOGGER_KEY + "Authentication already done to: " + this.mStorageAccount.getBlobStorageUri().toString());
 			}
 		} catch (InvalidKeyException e) {
 			log.error(LOGGER_KEY + e.getMessage(), e);
@@ -223,10 +219,8 @@ public class AzureBlobPluggableTransport implements PluggableClient {
 				log.info(LOGGER_KEY + "Container: " + this.config.getContainer() + " doesn't exist. Creating ...");
 				log.info(LOGGER_KEY + "Auto-created container status: " + this.mBlobContainer.createIfNotExists());
 			} else {
-				log.error(LOGGER_KEY + "Container: " + this.config.getContainer()
-						+ " doesn't exist. Auto-creating container is disabled");
-				throw new TransportInitializationException("Container: " + this.config.getContainer()
-						+ " doesn't exist. Auto-creating container is disabled");
+				log.error(LOGGER_KEY + "Container: " + this.config.getContainer() + " doesn't exist. Auto-creating container is disabled");
+				throw new TransportInitializationException("Container: " + this.config.getContainer() + " doesn't exist. Auto-creating container is disabled");
 			}
 			log.info(LOGGER_KEY + "Connection successful to Container [" + this.mBlobContainer.getName() + "]");
 
@@ -267,8 +261,7 @@ public class AzureBlobPluggableTransport implements PluggableClient {
 				for (Iterator<String> iterator = blobMetadata.keySet().iterator(); iterator.hasNext();) {
 					String key = (String) iterator.next();
 					pluggableMessage.setMetadata(key, blobMetadata.get(key));
-					log.info(LOGGER_KEY + "Source Blob Metadata [Key =" + key + ", Value=[" + blobMetadata.get(key)
-							+ "]");
+					log.info(LOGGER_KEY + "Source Blob Metadata [Key =" + key + ", Value=[" + blobMetadata.get(key) + "]");
 				}
 
 				targetStream = new ByteArrayOutputStream();
@@ -432,8 +425,7 @@ public class AzureBlobPluggableTransport implements PluggableClient {
 				log.info(LOGGER_KEY + "Appending Interchange metadata to Blob Metadata");
 				customMetadata.putAll(AzureTransportUtility.sanitizeMetadata(pluggableMessageMetadata));
 			}
-			log.info(LOGGER_KEY + "Azure Storage Upload to [" + containerName + "] under path [" + destinationDirectory
-					+ "] for file [" + fileName + "] underway");
+			log.info(LOGGER_KEY + "Azure Storage Upload to [" + containerName + "] under path [" + destinationDirectory + "] for file [" + fileName + "] underway");
 			if (isRegularUploadMode) {
 				status = regularUpload(this.mBlobContainer, fileName, pluggableMessage, customMetadata, fileSize);
 			} else {
@@ -472,8 +464,7 @@ public class AzureBlobPluggableTransport implements PluggableClient {
 				int blockNumber = 0;
 				long bytesRead = 0;
 
-				log.info(LOGGER_KEY + "Block Size set to: " + PluginConstants.BLOCK_SIZE + ". Calculated blocks are: "
-						+ blockCount);
+				log.info(LOGGER_KEY + "Block Size set to: " + PluginConstants.BLOCK_SIZE + ". Calculated blocks are: " + blockCount);
 
 				// Managed list of all block ids being uploaded
 				List<BlockEntry> blockList = new ArrayList<BlockEntry>();
@@ -506,10 +497,8 @@ public class AzureBlobPluggableTransport implements PluggableClient {
 
 					// upload block chunk to Azure Storage
 					chunkedBlob.uploadBlock(blockId, input, (long) bytesToRead);
-					log.info(LOGGER_KEY + " -- Block [Id: " + blockId + "]: " + String.format("%.0f%%", percentageDone)
-							+ " uploaded. ");
-					log.debug(LOGGER_KEY + " ---- Bytes Written in Block [Id:" + blockId + "]: " + bytesToRead
-							+ ", [Upload Progress: Written( " + bytesRead + "), Left: (" + bytesLeft + ") ]");
+					log.info(LOGGER_KEY + " -- Block [Id: " + blockId + "]: " + String.format("%.0f%%", percentageDone) + " uploaded. ");
+					log.debug(LOGGER_KEY + " ---- Bytes Written in Block [Id:" + blockId + "]: " + bytesToRead + ", [Upload Progress: Written( " + bytesRead + "), Left: (" + bytesLeft + ") ]");
 
 					// increment/decrement counters
 					bytesRead += bytesToRead;
@@ -525,8 +514,7 @@ public class AzureBlobPluggableTransport implements PluggableClient {
 					log.info(LOGGER_KEY + "Azure Blob 'multipart' upload finished successfully.");
 			}
 		} catch (URISyntaxException urie) {
-			log.error(LOGGER_KEY + "Azure Resource URI constructed based on the containerName is invalid. "
-					+ urie.getMessage());
+			log.error(LOGGER_KEY + "Azure Resource URI constructed based on the containerName is invalid. " + urie.getMessage());
 			throw new UnableToProduceException(urie.getMessage(), urie);
 		} catch (StorageException se) {
 			log.error(LOGGER_KEY + "Azure Storage Service Error occurred. " + se.getMessage());
@@ -560,8 +548,7 @@ public class AzureBlobPluggableTransport implements PluggableClient {
 					log.info(LOGGER_KEY + "Azure Blob upload finished successfully.");
 			}
 		} catch (URISyntaxException urie) {
-			log.error(LOGGER_KEY + "Azure Resource URI constructed based on the containerName is invalid. "
-					+ urie.getMessage());
+			log.error(LOGGER_KEY + "Azure Resource URI constructed based on the containerName is invalid. " + urie.getMessage());
 			throw new UnableToProduceException(urie.getMessage(), urie);
 		} catch (StorageException se) {
 			log.error(LOGGER_KEY + "Azure Storage Service Error occurred. " + se.getMessage());
