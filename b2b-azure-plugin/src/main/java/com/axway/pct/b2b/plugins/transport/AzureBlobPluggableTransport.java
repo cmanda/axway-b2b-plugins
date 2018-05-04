@@ -83,7 +83,7 @@ public class AzureBlobPluggableTransport implements PluggableClient {
 
 	private String _exchangeType = null;
 
-	private static final String _PROGRAM_VERSION = "1.0-POC";
+	private static final String _PROGRAM_VERSION = "1.0";
 	private static final String _PROGRAM_NAME = "Azure-Blob";
 
 	public AzureBlobPluggableTransport() {
@@ -144,6 +144,11 @@ public class AzureBlobPluggableTransport implements PluggableClient {
 					bean.setPatternType(pluggableSettings.getSetting(SETTING_PATTERN_TYPE));
 					bean.setKey(pluggableSettings.getSetting(SETTING_KEY));
 					bean.setName(pluggableSettings.getSetting(SETTING_NAME));
+					
+					if (pluggableSettings.getSetting(SETTING_PICKUP_PATH).equals("")) {
+						bean.setPickupPath("/");
+					}
+					
 					log.debug(LOGGER_KEY + "Container		: " + bean.getContainer());
 					log.debug(LOGGER_KEY + "Pickup Pattern	: " + bean.getPickupPattern());
 					log.debug(LOGGER_KEY + "Pickup Path		: " + bean.getPickupPath());
@@ -165,7 +170,7 @@ public class AzureBlobPluggableTransport implements PluggableClient {
 					log.debug(LOGGER_KEY + "Upload Destination		: " + bean.getUploadDestination());
 					log.debug(LOGGER_KEY + "Upload Mode				: " + bean.getUploadMode());
 					log.debug(LOGGER_KEY + "User Metadata			: " + bean.getUserMetadata());
-					log.debug(LOGGER_KEY + "Add Interchange Metadata: " + bean.getAppendMetadata());
+					log.debug(LOGGER_KEY + "Add B2Bi Metadata		: " + bean.getAppendMetadata());
 					log.debug(LOGGER_KEY + "Storage Account			: " + bean.getName());
 
 				}
@@ -255,7 +260,7 @@ public class AzureBlobPluggableTransport implements PluggableClient {
 			} else {
 				log.info(LOGGER_KEY + "Source Blob exists at: " + downloadPath);
 
-				// set the metadata on the Interchange PluggableMessage
+				// set the metadata on the B2Bi PluggableMessage
 				blobMetadata = downloadBlob.getMetadata();
 				log.info(LOGGER_KEY + "Source Blob Metadata has " + blobMetadata.size() + " entries");
 				for (Iterator<String> iterator = blobMetadata.keySet().iterator(); iterator.hasNext();) {
@@ -420,9 +425,9 @@ public class AzureBlobPluggableTransport implements PluggableClient {
 					this.config.getUploadMode());
 			Map<String, String> customMetadata = AzureTransportUtility.getCustomMetadata(this.config);
 			Map<String, String> pluggableMessageMetadata = pluggableMessage.getMetadata();
-			// Sanitize & Update Interchange metadata to match Azure Blob Metadata
+			// Sanitize & Update B2Bi metadata to match Azure Blob Metadata
 			if(this.config.getAppendMetadata().equalsIgnoreCase(PluginConstants.APPEND_METADATA_FLAG_YES)) {
-				log.info(LOGGER_KEY + "Appending Interchange metadata to Blob Metadata");
+				log.info(LOGGER_KEY + "Appending B2Bi metadata to Blob Metadata");
 				customMetadata.putAll(AzureTransportUtility.sanitizeMetadata(pluggableMessageMetadata));
 			}
 			log.info(LOGGER_KEY + "Azure Storage Upload to [" + containerName + "] under path [" + destinationDirectory + "] for file [" + fileName + "] underway");
