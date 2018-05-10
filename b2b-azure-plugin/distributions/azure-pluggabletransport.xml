@@ -58,7 +58,7 @@
                                 <SelectionItem>multipart</SelectionItem>
                         </SelectionList>
                 </SettingDefinition>
-                <SettingDefinition name="Delivery Folder" description="Destination folder to upload the blob within a container. Default is \"/\"" encrypt="false" mask="false" required="false" type="string" defaultValue="" />
+                <SettingDefinition name="Delivery Folder" description="Destination folder to upload the blob within a container." encrypt="false" mask="false" required="false" type="string" defaultValue="" />
                 <SettingDefinition name="User Metadata" description="Custom Metadata to add to Payload" encrypt="false" mask="false" required="false" type="multiString" defaultValue="" />
                 <SettingDefinition name="Append Axway Metadata" description="Append B2Bi Metadata to blob" type="string" defaultValue="yes" required="true" encrypt="false" mask="false">
                         <SelectionList>
