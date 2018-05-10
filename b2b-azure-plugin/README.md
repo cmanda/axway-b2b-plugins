@@ -1,5 +1,5 @@
 ## Azure Blob Storage plugin with Application pickup, and Delivery
-* Download PluggableTransport [here](distributions)
+* Download PluggableTransport [here](https://github.com/cmanda/axway-b2b-plugins/tree/master/b2b-azure-plugin/distributions)
   * Formats available [tar](distributions/b2b-azure-plugin.tar), [zip](distributions/b2b-azure-plugin.zip)
 * Extract the contents of the tar/zip file to ```{B2BI_INSTALL_HOME}/Interchange/site/jars``` on each of the B2Bi cluster nodes.
   * NOTE: All the libraries referenced by the plugin are included in the tar/zip file.
